@@ -44,7 +44,7 @@ public class Application {
             boolean performAgain = callback.call();
 
             if (performAgain) {
-                // :)
+               performFileOperations();
             }
         }
     }
