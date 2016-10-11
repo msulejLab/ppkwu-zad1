@@ -30,17 +30,18 @@ public class Application {
 
     private static void setData(String filename, String correctString, String wrongString, FileCallback callback) throws Exception {
         File file = new File(filename + "." + FORMAT);
-
+        boolean savedCorrectly = false;
         try {
             file.createNewFile();
             IOUtils.writeToFile(file, HELLO_WORLD);
             System.out.println(correctString);
-
-            callback.setResult(true);
+            savedCorrectly = true;
         } catch (IOException e) {
-            callback.setResult(false);
             System.out.println(wrongString);
         } finally {
+            MainCallback mainCallback = new MainCallback();
+            mainCallback.setFileData(new FileData(correctString, wrongString, savedCorrectly));
+
             boolean performAgain = callback.call();
 
             if (performAgain) {
@@ -48,4 +49,6 @@ public class Application {
             }
         }
     }
+
+
 }
