@@ -1,15 +1,13 @@
 package pl.ppkwu.lab;
 
-public class FileData {
+public class StringSetup {
 
     private String correctString;
     private String wrongString;
-    private Boolean savedCorrectly;
 
-    public FileData(String correctString, String wrongString, Boolean savedCorrectly) {
+    public StringSetup(String correctString, String wrongString) {
         this.correctString = correctString;
         this.wrongString = wrongString;
-        this.savedCorrectly = savedCorrectly;
     }
 
     public String getCorrectString() {
@@ -20,7 +18,8 @@ public class FileData {
         return wrongString;
     }
 
-    public Boolean getSavedCorrectly() {
-        return savedCorrectly;
+    @Override
+    public String toString() {
+        return String.format("Poprawny String: %s\nZly String: %s\n", correctString, wrongString);
     }
 }

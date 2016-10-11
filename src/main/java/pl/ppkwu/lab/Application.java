@@ -1,7 +1,5 @@
 package pl.ppkwu.lab;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -12,8 +10,6 @@ public class Application {
 
     public static void main(String[] args) {
         performFileOperations();
-
-        System.out.println("Zakonczono dzialanie programu");
     }
 
     private static void performFileOperations() {
@@ -28,7 +24,8 @@ public class Application {
         }
     }
 
-    private static void setData(String filename, String correctString, String wrongString, FileCallback callback) throws Exception {
+    private static void setData(
+            String filename, String correctString, String wrongString, FileCallback fileCallback) throws Exception {
         File file = new File(filename + "." + FORMAT);
         boolean savedCorrectly = false;
         try {
@@ -40,15 +37,15 @@ public class Application {
             System.out.println(wrongString);
         } finally {
             MainCallback mainCallback = new MainCallback();
-            mainCallback.setFileData(new FileData(correctString, wrongString, savedCorrectly));
+            mainCallback.setStringSetup(new StringSetup(correctString, wrongString));
+            mainCallback.setSavedCorrectly(savedCorrectly);
+            mainCallback.setFileCallback(fileCallback);
 
-            boolean performAgain = callback.call();
+            Boolean performAgain = mainCallback.call();
 
             if (performAgain) {
                performFileOperations();
             }
         }
     }
-
-
 }
