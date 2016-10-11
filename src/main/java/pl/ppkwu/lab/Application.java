@@ -30,9 +30,9 @@ public class Application {
 
     private static void setData(String filename, String correctString, String wrongString, FileCallback callback) throws Exception {
         File file = new File(filename + "." + FORMAT);
-        file.createNewFile();
 
         try {
+            file.createNewFile();
             IOUtils.writeToFile(file, HELLO_WORLD);
             System.out.println(correctString);
 
